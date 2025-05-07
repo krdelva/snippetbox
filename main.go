@@ -11,6 +11,12 @@ import (
 // "Hello from Snippetbox" as the response body.
 func home(w http.ResponseWriter, r *http.Request) {
 	log.Print("HOME")
+
+	// Use the Header().Add() method to add a 'Server: Go' header to the
+	// response header map. The first parameter is the header name, and
+	// the second parameter is the header value.
+	w.Header().Add("Server", "Go")
+
 	w.Write([]byte("Hello from Snippetbox"))
 }
 
@@ -42,7 +48,7 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 func snippetCreatePost(w http.ResponseWriter, r *http.Request) {
 	log.Print("SNIPPET CREATE POST")
 	// Use the w.WriteHeader() method to send a 201 status code.
-	w.WriteHeader(201)
+	w.WriteHeader(http.StatusCreated)
 
 	// Then use w.Write() method to write the response body as normal.
 	w.Write([]byte("Save a new snippet..."))
