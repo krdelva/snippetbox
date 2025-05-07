@@ -39,6 +39,15 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Display a form for creating a new snippet..."))
 }
 
+func snippetCreatePost(w http.ResponseWriter, r *http.Request) {
+	log.Print("SNIPPET CREATE POST")
+	// Use the w.WriteHeader() method to send a 201 status code.
+	w.WriteHeader(201)
+
+	// Then use w.Write() method to write the response body as normal.
+	w.Write([]byte("Save a new snippet..."))
+}
+
 func main() {
 	// Use the http.NewServeMux() function to initialize a new servemux, then
 	// register the home function as the handler for the "/" URL pattern.
@@ -49,6 +58,7 @@ func main() {
 	mux.HandleFunc("GET /{$}", home)
 	mux.HandleFunc("GET /snippet/view/{id}", snippetView)
 	mux.HandleFunc("GET /snippet/create", snippetCreate)
+	mux.HandleFunc("POST /snippet/create", snippetCreatePost)
 
 	// Print a log message to say that the server is starting.
 	log.Print("starting server on :4000")
